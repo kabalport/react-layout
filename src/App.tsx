@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import MenuBar from './components/MenuBar';
+import SearchBar from './components/SearchBar';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+
+const App: React.FC = () => {
+    const handleSearch = (value: string) => {
+        console.log('검색어:', value);
+        // 여기에 실제 검색 로직을 구현하면 됩니다.
+    };
+
+    return (
+      <Router>
+        <Header />
+        <MenuBar />
+          <SearchBar onSearch={handleSearch} />
+          <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+        <Footer />
+      </Router>
   );
-}
+};
 
 export default App;
